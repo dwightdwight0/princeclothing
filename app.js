@@ -9,7 +9,8 @@ var fileUpload = require('express-fileupload');
 var passport = require('passport');
 
 // Connect to db
-mongoose.connect(config.database);
+mongoose.connect(config.database, { useMongoClient: true });
+mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
@@ -65,7 +66,7 @@ app.use(bodyParser.json());
 
 // Express Session middleware
 app.use(session({
-    secret: 'keyboard cat',
+    secret: 'keyboaakjdaskldjrd cat',
     resave: true,
     saveUninitialized: true
 //  cookie: { secure: true }
@@ -143,7 +144,7 @@ app.use('/users', users);
 app.use('/', pages);
 
 // Start the server
-var port = 3000;
+var port = 5000;
 app.listen(port, function () {
     console.log('Server started on port ' + port);
 });
